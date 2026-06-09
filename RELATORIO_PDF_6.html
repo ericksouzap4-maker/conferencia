@@ -1112,10 +1112,11 @@ function renderDoc(statusMap, nomeResp, matricula, dataConf, url) {
     var st = statusMap[item.patrimonio] || {};
     if (st.status === 'CONFERIDO') {
       conferidos++;
-      if (st.situacao === 'EM USO')        emUso++;
-      if (st.situacao === 'SUCATA')        sucata++;
-      if (st.situacao === 'A DESCARREGAR') descarregar++;
-      if (st.situacao === 'EM MANUTENCAO') manutencao++;
+      var sitRes = (!st.situacao || st.situacao === '' || st.situacao === 'undefined') ? 'EM USO' : st.situacao;
+      if (sitRes === 'EM USO')        emUso++;
+      if (sitRes === 'SUCATA')        sucata++;
+      if (sitRes === 'A DESCARREGAR') descarregar++;
+      if (sitRes === 'EM MANUTENCAO') manutencao++;
     } else {
       pendentes++;
     }
@@ -1165,7 +1166,7 @@ function renderDoc(statusMap, nomeResp, matricula, dataConf, url) {
     html += '<thead><tr><th>Nº</th><th>Patrimônio</th><th>Item</th><th>Situação</th><th>Conferido por</th><th>Data/Hora</th><th>Observação</th></tr></thead><tbody>';
     itensLocal.forEach(function(item) {
       var st = statusMap[item.patrimonio] || {};
-      var sit = st.situacao || '';
+      var sit = (st.status === 'CONFERIDO' && (!st.situacao || st.situacao === '' || st.situacao === 'undefined')) ? 'EM USO' : (st.situacao || '');
       var cls = st.status === 'CONFERIDO' ? corLinha(sit) : '';
       html += '<tr class="' + cls + '">';
       html += '<td>' + item.seq + '</td>';

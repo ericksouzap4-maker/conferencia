@@ -72,7 +72,6 @@
 var WEB_APP = 'https://script.google.com/macros/s/AKfycbybhdYavRwhLzlly-lP5-TGYw7TAhsm10hqpVh4FhXErHUGnk_yXjOmmS5MZgIMA2nrqg/exec';
 var params = new URLSearchParams(window.location.search);
 var PAT = params.get('p') || '';
-var ACAO = params.get('acao') || 'ver';
 
 if (!PAT) {
   document.getElementById('loading').textContent = 'Parametro de patrimonio nao encontrado.';
@@ -93,11 +92,14 @@ if (!PAT) {
       document.getElementById('nome').textContent = d.nome || '';
       document.getElementById('local').textContent = d.local ? 'Local: ' + d.local : '';
       if (d.obs) document.getElementById('obs').value = d.obs;
-      if (d.situacao) document.getElementById('sit').value = d.situacao;
+      if (d.situacao && d.situacao !== 'undefined') {
+        document.getElementById('sit').value = d.situacao;
+      }
       atualizarCorSit();
       if (d.jaConferido) {
         var ac = document.getElementById('aviso-conf');
-        ac.innerHTML = '<strong>Ja conferido</strong><br>Por: ' + d.confPor + '<br>Em: ' + d.confData + '<br>Situacao: ' + d.situacao;
+        var sit = (d.situacao && d.situacao !== 'undefined') ? d.situacao : 'EM USO';
+        ac.innerHTML = '<strong>Ja conferido</strong><br>Por: ' + d.confPor + '<br>Em: ' + formatarData(d.confData) + '<br>Situacao: ' + sit;
         ac.style.display = 'block';
         var b = document.getElementById('btn');
         b.textContent = 'RECONFIRMAR';
@@ -108,6 +110,22 @@ if (!PAT) {
       document.getElementById('loading').style.display = 'none';
       document.getElementById('info').style.display = 'block';
     });
+}
+
+function formatarData(str) {
+  if (!str) return '';
+  // Se já está no formato dd/MM/yyyy HH:mm:ss, retorna direto
+  if (str.match(/^\d{2}\/\d{2}\/\d{4}/)) return str;
+  // Caso contrário, tenta converter
+  try {
+    var d = new Date(str);
+    var dia = String(d.getDate()).padStart(2,'0');
+    var mes = String(d.getMonth()+1).padStart(2,'0');
+    var ano = d.getFullYear();
+    var h = String(d.getHours()).padStart(2,'0');
+    var m = String(d.getMinutes()).padStart(2,'0');
+    return dia+'/'+mes+'/'+ano+' '+h+':'+m;
+  } catch(e) { return str; }
 }
 
 function atualizarCorSit() {
@@ -143,16 +161,16 @@ function confirmar() {
   .then(function(r) { return r.json(); })
   .then(function(d) {
     if (d.sucesso) {
-      document.getElementById('ic').textContent = '✅';
+      document.getElementById('ic').textContent = '\u2705';
       document.getElementById('msg').textContent = 'Conferencia registrada!';
       document.getElementById('det').textContent = d.nome + ' - ' + d.local;
     } else {
-      document.getElementById('ic').textContent = '❌';
+      document.getElementById('ic').textContent = '\u274c';
       document.getElementById('msg').textContent = d.mensagem;
     }
   })
   .catch(function() {
-    document.getElementById('ic').textContent = '❌';
+    document.getElementById('ic').textContent = '\u274c';
     document.getElementById('msg').textContent = 'Erro de conexao.';
   });
 }

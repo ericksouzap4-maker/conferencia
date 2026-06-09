@@ -80,14 +80,25 @@ var GRUPOS = {"SALA CMT": [{"patrimonio": "2545904-0", "nome": "AR CONDICIONADO 
 var IGNORAR = ['vp ', 'mp ', 'bsc ', 'bcs ', 'baixada', '18ºbpm'];
 
 var params = new URLSearchParams(window.location.search);
-var LOCAL = params.get('local') || '';
+var LOCAL = decodeURIComponent(params.get('local') || '');
 var ST = {};
 
-if (!LOCAL || !GRUPOS[LOCAL]) {
+// tenta match exato ou case-insensitive
+var LOCAL_KEY = LOCAL;
+if (!GRUPOS[LOCAL]) {
+  var keys = Object.keys(GRUPOS);
+  for (var ki = 0; ki < keys.length; ki++) {
+    if (keys[ki].toLowerCase().trim() === LOCAL.toLowerCase().trim()) {
+      LOCAL_KEY = keys[ki];
+      break;
+    }
+  }
+}
+if (!LOCAL || !GRUPOS[LOCAL_KEY]) {
   document.getElementById('erro-local').style.display = 'block';
 } else {
   document.getElementById('app').style.display = 'block';
-  document.getElementById('titulo-local').textContent = LOCAL;
+  document.getElementById('titulo-local').textContent = LOCAL_KEY;
 
   var n = localStorage.getItem('operador_nome') || '';
   if (n) document.getElementById('op').value = n;
@@ -149,7 +160,7 @@ function criarItem(item) {
 }
 
 function render() {
-  var itens = GRUPOS[LOCAL] || [];
+  var itens = GRUPOS[LOCAL_KEY] || [];
   var lista = document.getElementById('lista');
   lista.innerHTML = '';
   itens.forEach(function(item) { lista.appendChild(criarItem(item)); });
@@ -165,7 +176,7 @@ function tog(chk, pat) {
 }
 
 function prog() {
-  var itens = GRUPOS[LOCAL] || [];
+  var itens = GRUPOS[LOCAL_KEY] || [];
   var t = itens.length;
   var m = document.querySelectorAll('.chk:checked').length;
   var p = t > 0 ? Math.round(m / t * 100) : 0;

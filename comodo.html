@@ -42,11 +42,13 @@ body{font-family:Segoe UI,sans-serif;background:#0f0f1a;color:#e2e8f0;padding-bo
 .mbox{background:#1a1a2e;border-radius:16px;padding:32px 24px;max-width:340px;width:90%;text-align:center;border:1px solid #2a2a4a}
 .mic{font-size:56px;margin-bottom:12px}.mmsg{font-size:16px;font-weight:600;margin-bottom:6px}.mdet{font-size:13px;color:#6b7280}
 .erro{text-align:center;padding:40px 20px;color:#6b7280;font-size:14px}
+.loading{text-align:center;padding:60px 20px;color:#6b7280;font-size:14px}
 </style>
 </head>
 <body>
 
 <div id="erro-local" class="erro" style="display:none">Local não encontrado.</div>
+<div id="loading" class="loading">Carregando itens...</div>
 
 <div id="app" style="display:none">
   <div class="cab">
@@ -59,7 +61,7 @@ body{font-family:Segoe UI,sans-serif;background:#0f0f1a;color:#e2e8f0;padding-bo
     <input type="text" id="op" placeholder="Seu nome / matricula">
     <button class="btr" onclick="trocar()">Trocar</button>
   </div>
-  <div class="lista" id="lista">Carregando...</div>
+  <div class="lista" id="lista"></div>
   <div class="rodape">
     <button class="benv" id="btn" onclick="enviar()" disabled>ENVIAR CONFERENCIA</button>
   </div>
@@ -74,44 +76,65 @@ body{font-family:Segoe UI,sans-serif;background:#0f0f1a;color:#e2e8f0;padding-bo
 
 <script>
 var WEB_APP = 'https://script.google.com/macros/s/AKfycbz7LQwsrslCW-DegkBmHC7QSWW43-DwSPHq7FfHvPVJEzYiFD5KLGuDTeHTToDh4jrYow/exec';
-var GRUPOS = {"SALA CMT": [{"patrimonio": "2545904-0", "nome": "AR CONDICIONADO 7500 BTU"}, {"patrimonio": "3085739-2", "nome": "ARMARIO PARA ESCRITORIO"}, {"patrimonio": "5936415-7", "nome": "COMPUTADOR PADRAO"}, {"patrimonio": "3554276-4", "nome": "ESTABILIZADOR ELETRONICO DE TENSAO"}, {"patrimonio": "6078935-2", "nome": "ESTACAO DE TRABALHO EM L"}, {"patrimonio": "2547738-2", "nome": "FRIGOBAR"}, {"patrimonio": "6382554-6", "nome": "GAVETEIRO USO ESCRITORIO"}, {"patrimonio": "8736618-5", "nome": "GRAVADOR PARA SISTEMA DE SEGURANCA (CFTV)"}, {"patrimonio": "3050928-9", "nome": "IMPRESSORA MULTIFUNCIONAL JATO DE TINTA"}], "ADM": [{"patrimonio": "2547669-6", "nome": "AR CONDICIONADO SPLIT HIGHWALL"}, {"patrimonio": "6078915-8", "nome": "ARMARIO PARA ESCRITORIO ALTO"}, {"patrimonio": "6078917-4", "nome": "ARMARIO PARA ESCRITORIO ALTO"}, {"patrimonio": "7512739-3", "nome": "ARMARIO PARA ESCRITORIO BAIXO"}, {"patrimonio": "6526810-5", "nome": "ARQUIVO PARA ESCRITORIO"}, {"patrimonio": "6526851-2", "nome": "ARQUIVO PARA ESCRITORIO"}, {"patrimonio": "6528700-2", "nome": "ARQUIVO PARA ESCRITORIO"}, {"patrimonio": "6287309-1", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6285249-3", "nome": "COMPUTADOR"}, {"patrimonio": "6285259-0", "nome": "COMPUTADOR"}, {"patrimonio": "9803396-4", "nome": "COMPUTADOR BASICO"}, {"patrimonio": "9803397-2", "nome": "COMPUTADOR BASICO"}, {"patrimonio": "7474780-0", "nome": "COMPUTADOR INTERMEDIARIO"}, {"patrimonio": "2731196-1", "nome": "ESTACAO DE TRABALHO"}, {"patrimonio": "4262221-2", "nome": "ESTACAO DE TRABALHO"}, {"patrimonio": "4262228-0", "nome": "ESTACAO DE TRABALHO"}, {"patrimonio": "4262231-0", "nome": "ESTACAO DE TRABALHO"}, {"patrimonio": "6378602-8", "nome": "GAVETEIRO USO ESCRITORIO"}, {"patrimonio": "6378615-0", "nome": "GAVETEIRO USO ESCRITORIO"}, {"patrimonio": "6381448-0", "nome": "GAVETEIRO USO ESCRITORIO"}, {"patrimonio": "10068638-9", "nome": "POLTRONA PARA ESCRITORIO"}, {"patrimonio": "10068645-1", "nome": "POLTRONA PARA ESCRITORIO"}, {"patrimonio": "6238140-7", "nome": "PONTO DE ACESSO EXTERNO"}, {"patrimonio": "5327271-4", "nome": "PROJETOR MULTIMIDIA"}, {"patrimonio": "2545959-7", "nome": "REFRIGERADOR DOMESTICO GELADEIRA"}], "AUDITORIO": [{"patrimonio": "3280062-2", "nome": "AR CONDICIONADO SPLIT HIGHWALL"}, {"patrimonio": "6291033-7", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "2547252-6", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547253-4", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547254-2", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547255-0", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547256-9", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547257-7", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547259-3", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547262-3", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "7478310-6", "nome": "MESA AUXILIAR ESTACAO DE TRABALHO"}, {"patrimonio": "7584125-8", "nome": "MESA AUXILIAR ESTACAO DE TRABALHO"}, {"patrimonio": "12786215-3", "nome": "TELEVISAO SMART TV"}], "INTENDENCIA": [{"patrimonio": "6600429-2", "nome": "ARMARIO DE USO GERAL"}, {"patrimonio": "6363137-7", "nome": "ARMARIO PARA ESCRITORIO"}, {"patrimonio": "2546017-0", "nome": "ARQUIVO PARA ESCRITORIO"}, {"patrimonio": "3276530-4", "nome": "BINOCULO USO POLICIAL"}, {"patrimonio": "5943391-4", "nome": "BINOCULO USO POLICIAL"}, {"patrimonio": "5943392-2", "nome": "BINOCULO USO POLICIAL"}, {"patrimonio": "8736769-6", "nome": "CAMERA DE MONITORAMENTO MINI DOME"}, {"patrimonio": "5251304-1", "nome": "CAMERA FOTOGRAFICA DIGITAL"}, {"patrimonio": "6285251-5", "nome": "COMPUTADOR"}, {"patrimonio": "6482143-9", "nome": "ESCANINHO PARA ESCRITORIO"}, {"patrimonio": "6486097-3", "nome": "ESCANINHO PARA ESCRITORIO"}, {"patrimonio": "6490568-3", "nome": "ESCANINHO PARA ESCRITORIO"}, {"patrimonio": "6498072-3", "nome": "ESCANINHO PARA ESCRITORIO"}, {"patrimonio": "6499892-4", "nome": "ESCANINHO PARA ESCRITORIO"}, {"patrimonio": "2667024-0", "nome": "ESTANTE PARA BIBLIOTECA"}, {"patrimonio": "6381223-1", "nome": "GAVETEIRO USO ESCRITORIO"}, {"patrimonio": "6239512-2", "nome": "IMPRESSORA TERMICA"}, {"patrimonio": "6239515-7", "nome": "IMPRESSORA TERMICA"}, {"patrimonio": "6239518-1", "nome": "IMPRESSORA TERMICA"}, {"patrimonio": "6621533-1", "nome": "MESA PARA ESCRITORIO FUNCIONARIO"}, {"patrimonio": "8740755-8", "nome": "NOTEBOOK BASICO"}, {"patrimonio": "12893010-1", "nome": "NOTEBOOK BASICO ULTRAFINO"}, {"patrimonio": "12893012-8", "nome": "NOTEBOOK BASICO ULTRAFINO"}, {"patrimonio": "12893013-6", "nome": "NOTEBOOK BASICO ULTRAFINO"}, {"patrimonio": "12893022-5", "nome": "NOTEBOOK BASICO ULTRAFINO"}, {"patrimonio": "6239330-8", "nome": "NOTEBOOK WINDOWS 10 PRO"}, {"patrimonio": "2519577-8", "nome": "NOTEBOOK, NETBOOK E/OU ULTRAFINO NOTEBOOK BASICO"}, {"patrimonio": "2547347-6", "nome": "PROJETOR MULTIMIDIA"}, {"patrimonio": "2545994-5", "nome": "RACK"}, {"patrimonio": "6226677-2", "nome": "SWITCH NAO GERENCIAVEL DE MESA"}], "COZINHA": [{"patrimonio": "6363605-0", "nome": "ARMARIO PARA ESCRITORIO"}, {"patrimonio": "2546132-0", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "2546147-8", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6296295-7", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6302524-8", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "12785494-0", "nome": "FORNO MICROONDAS"}, {"patrimonio": "12785849-0", "nome": "FRITADEIRA SEM OLEO (AIR FRYER)"}, {"patrimonio": "6622856-5", "nome": "MESA PARA ESCRITORIO FUNCIONARIO"}, {"patrimonio": "12790287-2", "nome": "REFRIGERADOR DOMESTICO GELADEIRA"}, {"patrimonio": "3496965-9", "nome": "SANDUICHEIRA"}], "RECEPCAO": [{"patrimonio": "12786326-5", "nome": "BEBEDOURO REFRIGERADO INDUSTRIAL"}, {"patrimonio": "6285260-4", "nome": "COMPUTADOR"}, {"patrimonio": "7474772-0", "nome": "COMPUTADOR INTERMEDIARIO"}, {"patrimonio": "2547260-7", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "2547261-5", "nome": "LONGARINA SALA DE ESPERA"}, {"patrimonio": "6304122-7", "nome": "MESA PARA ESCRITORIO"}, {"patrimonio": "6304132-4", "nome": "MESA PARA ESCRITORIO"}, {"patrimonio": "10068626-5", "nome": "POLTRONA PARA ESCRITORIO"}, {"patrimonio": "6559632-3", "nome": "SWITCH (SC)"}], "VEST. FEMININO": [{"patrimonio": "2546143-5", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "2546150-8", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "2546162-1", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6303963-0", "nome": "MESA PARA ESCRITORIO"}, {"patrimonio": "6591826-6", "nome": "VENTILADOR NAO INDUSTRIAL"}], "QUARTO LIMPEZA": [{"patrimonio": "2546145-1", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6434882-2", "nome": "ESTANTE PARA ALMOXARIFADO"}, {"patrimonio": "6435661-2", "nome": "ESTANTE PARA ALMOXARIFADO"}, {"patrimonio": "6435803-8", "nome": "ESTANTE PARA ALMOXARIFADO"}], "VEST. MASCULINO": [{"patrimonio": "2546154-0", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6636566-0", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6637119-8", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "6637169-4", "nome": "CADEIRA PARA ESCRITORIO"}, {"patrimonio": "2542056-9", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2542057-7", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2543274-5", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2543275-3", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2543276-1", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2543277-0", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2543286-9", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2543361-0", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2543366-0", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2544778-5", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2546014-5", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "2546015-3", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "6073523-6", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "6073524-4", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "6073525-2", "nome": "ROUPEIRO PARA VESTIARIO"}, {"patrimonio": "6073526-0", "nome": "ROUPEIRO PARA VESTIARIO"}], "AEREA EXTERNA CIA": [{"patrimonio": "8736772-6", "nome": "CAMERA DE MONITORAMENTO MINI DOME"}, {"patrimonio": "8736773-4", "nome": "CAMERA DE MONITORAMENTO MINI DOME"}, {"patrimonio": "8736770-0", "nome": "CAMERA DE MONITORAMENTO MINI DOME"}, {"patrimonio": "8736771-8", "nome": "CAMERA DE MONITORAMENTO MINI DOME"}], "LAVANDERIA": [{"patrimonio": "8736774-2", "nome": "CAMERA DE MONITORAMENTO MINI DOME"}, {"patrimonio": "7721872-8", "nome": "COLETOR/CONTENTOR DE LIXO"}], "EXTINTOR DE INCENDIO": [{"patrimonio": "2544519-7", "nome": "EXTINTOR DE INCENDIO"}, {"patrimonio": "2544520-0", "nome": "EXTINTOR DE INCENDIO"}, {"patrimonio": "2547613-0", "nome": "EXTINTOR DE INCENDIO"}, {"patrimonio": "2547614-9", "nome": "EXTINTOR DE INCENDIO"}, {"patrimonio": "2547617-3", "nome": "EXTINTOR DE INCENDIO"}, {"patrimonio": "2547618-1", "nome": "EXTINTOR DE INCENDIO"}], "CELA": [{"patrimonio": "6380635-5", "nome": "GAVETEIRO USO ESCRITORIO"}], "VEST. OFICAIS": [{"patrimonio": "2547281-0", "nome": "TELEVISAO"}]};
 
-// Remove acentos para comparação
 function semAcento(s) {
   return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
 }
 
-var IGNORAR = ['VP ', 'MP ', 'BSC ', 'BCS ', 'BAIXADA', '18OBPM'];
+var EXCLUIR_NOMES = ['pistola','carabina','espingarda','radio transceptor','viatura'];
+var IGNORAR_LOCAIS = ['vp ','mp ','bsc ','bcs ','baixada','18ºbpm'];
 
 var params = new URLSearchParams(window.location.search);
 var LOCAL = decodeURIComponent(params.get('local') || '');
 var ST = {};
+var ITENS = [];
 
-// Match: tenta exato, depois normalizado
-var LOCAL_KEY = null;
-var keys = Object.keys(GRUPOS);
-for (var ki = 0; ki < keys.length; ki++) {
-  if (keys[ki] === LOCAL) { LOCAL_KEY = keys[ki]; break; }
-}
-if (!LOCAL_KEY) {
-  for (var ki = 0; ki < keys.length; ki++) {
-    if (semAcento(keys[ki]) === semAcento(LOCAL)) { LOCAL_KEY = keys[ki]; break; }
-  }
-}
-
-if (!LOCAL || !LOCAL_KEY) {
+if (!LOCAL) {
+  document.getElementById('loading').style.display = 'none';
   document.getElementById('erro-local').style.display = 'block';
 } else {
-  document.getElementById('app').style.display = 'block';
-  document.getElementById('titulo-local').textContent = LOCAL_KEY;
-
-  var n = localStorage.getItem('operador_nome') || '';
-  if (n) document.getElementById('op').value = n;
-
-  fetch(WEB_APP + '?acao=status_comodo')
+  // Busca todos os itens e filtra pelo local
+  fetch(WEB_APP + '?acao=todos_itens')
     .then(function(r) { return r.json(); })
-    .then(function(d) { ST = d; render(); })
-    .catch(function() { render(); });
+    .then(function(dados) {
+      // Filtra armas e locais ignorados
+      var filtrado = dados.filter(function(item) {
+        var nome = item.nome.toLowerCase();
+        var local = item.local.toLowerCase().trim();
+        var excluiNome = EXCLUIR_NOMES.some(function(e) { return nome.includes(e); });
+        var excluiLocal = IGNORAR_LOCAIS.some(function(l) { return local.startsWith(l); });
+        return !excluiNome && !excluiLocal;
+      });
+
+      // Filtra pelo local do QR (com normalização de acento)
+      ITENS = filtrado.filter(function(item) {
+        return semAcento(item.local) === semAcento(LOCAL);
+      });
+
+      if (ITENS.length === 0) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('erro-local').style.display = 'block';
+        return;
+      }
+
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      document.getElementById('titulo-local').textContent = ITENS[0].local;
+
+      var n = localStorage.getItem('operador_nome') || '';
+      if (n) document.getElementById('op').value = n;
+
+      // Busca status dos itens conferidos
+      fetch(WEB_APP + '?acao=status_comodo')
+        .then(function(r) { return r.json(); })
+        .then(function(d) { ST = d; render(); })
+        .catch(function() { render(); });
+    })
+    .catch(function() {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('erro-local').textContent = 'Erro ao carregar itens. Verifique a conexão.';
+      document.getElementById('erro-local').style.display = 'block';
+    });
 }
 
 function corSit(v) {
@@ -165,10 +188,9 @@ function criarItem(item) {
 }
 
 function render() {
-  var itens = GRUPOS[LOCAL_KEY] || [];
   var lista = document.getElementById('lista');
   lista.innerHTML = '';
-  itens.forEach(function(item) { lista.appendChild(criarItem(item)); });
+  ITENS.forEach(function(item) { lista.appendChild(criarItem(item)); });
   prog();
 }
 
@@ -181,8 +203,7 @@ function tog(chk, pat) {
 }
 
 function prog() {
-  var itens = GRUPOS[LOCAL_KEY] || [];
-  var t = itens.length;
+  var t = ITENS.length;
   var m = document.querySelectorAll('.chk:checked').length;
   var p = t > 0 ? Math.round(m / t * 100) : 0;
   document.getElementById('ptxt').textContent = m + ' de ' + t + ' itens marcados (' + p + '%)';

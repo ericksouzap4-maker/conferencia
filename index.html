@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conferência - 39ª Cia PM</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0f0f1a; color: #e2e8f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .card { background: #1a1a2e; border-radius: 16px; padding: 32px 24px; max-width: 400px; width: 100%; border: 1px solid #2a2a4a; }
+  .topo { text-align: center; font-size: 12px; letter-spacing: 3px; color: #4b5563; text-transform: uppercase; margin-bottom: 20px; }
+  .pat { font-size: 26px; font-weight: 800; text-align: center; letter-spacing: 2px; margin-bottom: 6px; font-family: monospace; color: #fff; }
+  .nome { font-size: 15px; text-align: center; color: #e2e8f0; margin-bottom: 4px; }
+  .local { font-size: 13px; text-align: center; color: #6b7280; margin-bottom: 20px; }
+  .aviso { border-radius: 8px; padding: 10px 14px; font-size: 12px; margin-bottom: 14px; display: none; line-height: 1.5; }
+  .aviso.verde { background: #1a3a2a; border: 1px solid #22c55e; color: #86efac; }
+  .aviso.azul { background: #1e3a5f; border: 1px solid #1d6ef5; color: #93c5fd; }
+  label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #6b7280; margin-bottom: 6px; }
+  .lop { display: flex; gap: 8px; margin-bottom: 14px; align-items: center; }
+  input, textarea, select { width: 100%; padding: 12px 14px; background: #0f0f1a; border: 1px solid #2a2a4a; border-radius: 8px; color: #fff; font-size: 15px; outline: none; font-family: inherit; }
+  select { margin-bottom: 16px; cursor: pointer; }
+  select option { background: #1a1a2e; }
+  .sit-em-uso { border-color: #22c55e !important; color: #22c55e !important; }
+  .sit-sucata { border-color: #ef4444 !important; color: #ef4444 !important; }
+  .sit-descarregar { border-color: #f59e0b !important; color: #f59e0b !important; }
+  .sit-manutencao { border-color: #38bdf8 !important; color: #38bdf8 !important; }
+  textarea { resize: vertical; min-height: 70px; margin-bottom: 16px; }
+  .btr { padding: 10px 14px; background: transparent; border: 1px solid #2a2a4a; border-radius: 8px; color: #6b7280; font-size: 12px; cursor: pointer; white-space: nowrap; }
+  .btn { width: 100%; padding: 16px; background: #1d6ef5; border: none; border-radius: 10px; color: #fff; font-size: 17px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+  .btn.reconf { background: #d97706; }
+  .res { display: none; text-align: center; padding: 20px 0; }
+  .res .ic { font-size: 64px; }
+  .res .msg { font-size: 16px; margin-top: 12px; }
+  .res .det { font-size: 13px; color: #6b7280; margin-top: 8px; }
+  .loading { text-align: center; padding: 40px 0; color: #6b7280; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="topo">P4 - Conferencia de Material</div>
+  <div id="loading" class="loading">Carregando...</div>
+  <div id="info" style="display:none">
+    <div class="pat" id="pat"></div>
+    <div class="nome" id="nome"></div>
+    <div class="local" id="local"></div>
+    <div class="aviso verde" id="aviso-conf"></div>
+    <div class="aviso azul" id="aviso-op"></div>
+    <label>Seu nome / matricula</label>
+    <div class="lop">
+      <input type="text" id="op" placeholder="Ex: SD PM Erick Souza">
+      <button class="btr" onclick="trocar()">Trocar</button>
+    </div>
+    <label>Situacao do item</label>
+    <select id="sit" onchange="atualizarCorSit()">
+      <option value="EM USO">EM USO</option>
+      <option value="SUCATA">SUCATA</option>
+      <option value="A DESCARREGAR">A DESCARREGAR</option>
+      <option value="EM MANUTENCAO">EM MANUTENCAO</option>
+    </select>
+    <label>Observacao (opcional)</label>
+    <textarea id="obs" placeholder="Ex: Item com avaria..."></textarea>
+    <button class="btn" id="btn" onclick="confirmar()">CONFIRMAR CONFERENCIA</button>
+  </div>
+  <div class="res" id="res">
+    <div class="ic" id="ic"></div>
+    <div class="msg" id="msg"></div>
+    <div class="det" id="det"></div>
+  </div>
+</div>
+
+<script>
+var WEB_APP = 'https://script.google.com/macros/s/AKfycbybhdYavRwhLzlly-lP5-TGYw7TAhsm10hqpVh4FhXErHUGnk_yXjOmmS5MZgIMA2nrqg/exec';
+var params = new URLSearchParams(window.location.search);
+var PAT = params.get('p') || '';
+var ACAO = params.get('acao') || 'ver';
+
+if (!PAT) {
+  document.getElementById('loading').textContent = 'Parametro de patrimonio nao encontrado.';
+} else {
+  document.getElementById('pat').textContent = PAT;
+  var n = localStorage.getItem('operador_nome') || '';
+  if (n) {
+    document.getElementById('op').value = n;
+    var av = document.getElementById('aviso-op');
+    av.textContent = 'Conferindo como: ' + n;
+    av.style.display = 'block';
+  }
+  fetch(WEB_APP + '?p=' + encodeURIComponent(PAT) + '&acao=info')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('info').style.display = 'block';
+      document.getElementById('nome').textContent = d.nome || '';
+      document.getElementById('local').textContent = d.local ? 'Local: ' + d.local : '';
+      if (d.obs) document.getElementById('obs').value = d.obs;
+      if (d.situacao) document.getElementById('sit').value = d.situacao;
+      atualizarCorSit();
+      if (d.jaConferido) {
+        var ac = document.getElementById('aviso-conf');
+        ac.innerHTML = '<strong>Ja conferido</strong><br>Por: ' + d.confPor + '<br>Em: ' + d.confData + '<br>Situacao: ' + d.situacao;
+        ac.style.display = 'block';
+        var b = document.getElementById('btn');
+        b.textContent = 'RECONFIRMAR';
+        b.classList.add('reconf');
+      }
+    })
+    .catch(function() {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('info').style.display = 'block';
+    });
+}
+
+function atualizarCorSit() {
+  var s = document.getElementById('sit');
+  s.className = '';
+  var v = s.value;
+  if (v === 'EM USO') s.className = 'sit-em-uso';
+  else if (v === 'SUCATA') s.className = 'sit-sucata';
+  else if (v === 'A DESCARREGAR') s.className = 'sit-descarregar';
+  else if (v === 'EM MANUTENCAO') s.className = 'sit-manutencao';
+}
+
+function trocar() {
+  localStorage.removeItem('operador_nome');
+  document.getElementById('op').value = '';
+  document.getElementById('aviso-op').style.display = 'none';
+  document.getElementById('op').focus();
+}
+
+function confirmar() {
+  var op = document.getElementById('op').value.trim();
+  if (!op) { alert('Digite seu nome ou matricula.'); return; }
+  localStorage.setItem('operador_nome', op);
+  var obs = document.getElementById('obs').value.trim();
+  var sit = document.getElementById('sit').value;
+  document.getElementById('info').style.display = 'none';
+  document.getElementById('res').style.display = 'block';
+  document.getElementById('ic').textContent = '...';
+  fetch(WEB_APP, {
+    method: 'POST',
+    body: JSON.stringify({ patrimonio: PAT, operador: op, obs: obs, situacao: sit })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.sucesso) {
+      document.getElementById('ic').textContent = '✅';
+      document.getElementById('msg').textContent = 'Conferencia registrada!';
+      document.getElementById('det').textContent = d.nome + ' - ' + d.local;
+    } else {
+      document.getElementById('ic').textContent = '❌';
+      document.getElementById('msg').textContent = d.mensagem;
+    }
+  })
+  .catch(function() {
+    document.getElementById('ic').textContent = '❌';
+    document.getElementById('msg').textContent = 'Erro de conexao.';
+  });
+}
+</script>
+</body>
+</html>

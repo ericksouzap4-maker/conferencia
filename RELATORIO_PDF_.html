@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Relatório de Conferência - 39ª Cia PM</title>
+<title>Relatorio de Conferencia - 39a Cia PM</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  /* TELA DE CONFIGURAÇÃO */
   body { font-family: 'Segoe UI', sans-serif; background: #0f0f1a; color: #e2e8f0; }
   .tela-config { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
   .titulo-app { font-size: 12px; letter-spacing: 4px; color: #4b5563; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
@@ -18,18 +16,13 @@
   .painel input { width: 100%; padding: 13px 16px; background: #0f0f1a; border: 1px solid #2a2a4a; border-radius: 10px; color: #fff; font-size: 14px; outline: none; margin-bottom: 16px; }
   .painel input:focus { border-color: #1d6ef5; }
   .btn-gerar { width: 100%; padding: 16px; background: #1d6ef5; border: none; border-radius: 12px; color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 8px; }
-  .btn-gerar:hover { background: #1558d4; }
   .btn-gerar:disabled { background: #2a2a4a; color: #4a4a6a; cursor: not-allowed; }
   .erro { background: #3a1a1a; border: 1px solid #ef4444; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #fca5a5; margin-top: 16px; display: none; }
-
-  /* RELATÓRIO PARA IMPRESSÃO */
   .tela-relatorio { display: none; padding: 20px; }
   .barra-topo-rel { background: #1a1a2e; border-bottom: 1px solid #2a2a4a; padding: 14px 28px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; }
   .barra-topo-rel h1 { font-size: 15px; font-weight: 700; flex: 1; }
   .btn-imprimir { padding: 10px 24px; background: #1d6ef5; border: none; border-radius: 8px; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; }
   .btn-voltar-rel { padding: 10px 20px; background: transparent; border: 1px solid #2a2a4a; border-radius: 8px; color: #9ca3af; font-size: 14px; cursor: pointer; }
-
-  /* DOCUMENTO */
   .doc { background: #fff; color: #000; max-width: 780px; margin: 20px auto; padding: 48px 56px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; }
   .cabecalho-pm { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #000; padding-bottom: 16px; margin-bottom: 24px; }
   .cabecalho-pm img { width: 80px; height: 80px; object-fit: contain; }
@@ -64,7 +57,6 @@
   .assinatura .linha-assin { border-top: 1px solid #000; width: 300px; margin: 0 auto 6px; }
   .assinatura p { font-size: 11pt; }
   .rodape-doc { border-top: 1px solid #000; padding-top: 10px; margin-top: 32px; font-size: 9pt; color: #555; text-align: center; }
-
   @media print {
     body { background: #fff !important; }
     .barra-topo-rel, .tela-config { display: none !important; }
@@ -75,54 +67,44 @@
 </style>
 </head>
 <body>
-
-<!-- TELA CONFIG -->
 <div class="tela-config" id="tela-config">
-  <div class="titulo-app">Polícia Militar de Minas Gerais</div>
-  <div class="nome-app">Relatório de Conferência</div>
-  <div class="sub-app">39ª Cia PM / 18º BPM — Mapa de Carga</div>
+  <div class="titulo-app">Policia Militar de Minas Gerais</div>
+  <div class="nome-app">Relatorio de Conferencia</div>
+  <div class="sub-app">39a Cia PM / 18o BPM - Mapa de Carga</div>
   <div class="painel">
     <label>URL do Web App (Apps Script)</label>
     <input type="text" id="url-webapp" placeholder="https://script.google.com/macros/s/.../exec"
       value="https://script.google.com/macros/s/AKfycbz7LQwsrslCW-DegkBmHC7QSWW43-DwSPHq7FfHvPVJEzYiFD5KLGuDTeHTToDh4jrYow/exec">
-
-    <label>Nome do responsável pela conferência</label>
+    <label>Nome do responsavel pela conferencia</label>
     <input type="text" id="nome-resp" placeholder="Ex: SD PM Erick Souza">
-
-    <label>Número de matrícula</label>
-    <input type="text" id="matricula" placeholder="Ex: 123456">
-
-    <label>Data da conferência</label>
+    <label>Numero de matricula</label>
+    <input type="text" id="matricula" placeholder="Ex: 1813161">
+    <label>Data da conferencia</label>
     <input type="date" id="data-conf">
-
-    <button class="btn-gerar" id="btn-gerar" onclick="gerarRelatorio()">📄 GERAR RELATÓRIO PDF</button>
+    <button class="btn-gerar" id="btn-gerar" onclick="gerarRelatorio()">GERAR RELATORIO PDF</button>
     <div class="erro" id="erro"></div>
   </div>
 </div>
-
-<!-- TELA RELATÓRIO -->
 <div class="tela-relatorio" id="tela-relatorio">
   <div class="barra-topo-rel">
-    <button class="btn-voltar-rel" onclick="voltar()">← Voltar</button>
-    <h1>Relatório de Conferência — 39ª Cia PM</h1>
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+    <button class="btn-voltar-rel" onclick="voltar()">Voltar</button>
+    <h1>Relatorio de Conferencia - 39a Cia PM</h1>
+    <button class="btn-imprimir" onclick="window.print()">Imprimir / Salvar PDF</button>
   </div>
   <div class="doc" id="doc"></div>
 </div>
-
 <script>
-// Define data de hoje como padrão
 document.getElementById('data-conf').value = new Date().toISOString().split('T')[0];
 
 function formatarData(dateStr) {
   var d = new Date(dateStr + 'T12:00:00');
-  var meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  var meses = ['janeiro','fevereiro','marco','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
   return d.getDate() + ' de ' + meses[d.getMonth()] + ' de ' + d.getFullYear();
 }
 
 function corLinha(sit) {
-  if (sit === 'EM USO')        return 'linha-verde';
-  if (sit === 'SUCATA')        return 'linha-vermelha';
+  if (sit === 'EM USO') return 'linha-verde';
+  if (sit === 'SUCATA') return 'linha-vermelha';
   if (sit === 'A DESCARREGAR') return 'linha-amarela';
   if (sit === 'EM MANUTENCAO') return 'linha-azul';
   return '';
@@ -135,14 +117,13 @@ function badgeSit(sit) {
 }
 
 async function gerarRelatorio() {
-  var url      = document.getElementById('url-webapp').value.trim();
+  var url = document.getElementById('url-webapp').value.trim();
   var nomeResp = document.getElementById('nome-resp').value.trim();
-  var matricula= document.getElementById('matricula').value.trim();
+  var matricula = document.getElementById('matricula').value.trim();
   var dataConf = document.getElementById('data-conf').value;
-
   if (!url || !nomeResp || !matricula || !dataConf) {
     var erro = document.getElementById('erro');
-    erro.textContent = 'Preencha todos os campos antes de gerar.';
+    erro.textContent = 'Preencha todos os campos.';
     erro.style.display = 'block';
     return;
   }
@@ -150,19 +131,11 @@ async function gerarRelatorio() {
   var btn = document.getElementById('btn-gerar');
   btn.disabled = true;
   btn.textContent = 'Buscando dados...';
-
   try {
-    var resp = await fetch(url + '?acao=status_comodo');
-    var statusMap = await resp.json();
-
-    // Busca todos os itens da planilha
+    // Busca itens diretamente da planilha
     var respItens = await fetch(url + '?acao=todos_itens');
-    var todosItens = null;
-    try { todosItens = await respItens.json(); } catch(e) { todosItens = null; }
-
-    // Se não tiver a rota todos_itens, usa os dados do status
-    renderDoc(statusMap, nomeResp, matricula, dataConf, url);
-
+    var todosItens = await respItens.json();
+    renderDoc(todosItens, nomeResp, matricula, dataConf);
     document.getElementById('tela-config').style.display = 'none';
     document.getElementById('tela-relatorio').style.display = 'block';
   } catch(e) {
@@ -171,983 +144,49 @@ async function gerarRelatorio() {
     erro.style.display = 'block';
   }
   btn.disabled = false;
-  btn.textContent = '📄 GERAR RELATÓRIO PDF';
+  btn.textContent = 'GERAR RELATORIO PDF';
 }
 
-function renderDoc(statusMap, nomeResp, matricula, dataConf, url) {
-  // Dados fixos dos itens
-  var ITENS = [
-  {
-    "seq": "1",
-    "patrimonio": "2545904-0",
-    "nome": "AR CONDICIONADO 7500 BTU",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "2",
-    "patrimonio": "2547669-6",
-    "nome": "AR CONDICIONADO SPLIT HIGHWALL",
-    "local": "ADM"
-  },
-  {
-    "seq": "3",
-    "patrimonio": "3280062-2",
-    "nome": "AR CONDICIONADO SPLIT HIGHWALL",
-    "local": "SALA INSTRUÇÃO"
-  },
-  {
-    "seq": "4",
-    "patrimonio": "6600429-2",
-    "nome": "ARMARIO DE USO GERAL",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "5",
-    "patrimonio": "3085739-2",
-    "nome": "ARMARIO PARA ESCRITORIO",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "6",
-    "patrimonio": "6363137-7",
-    "nome": "ARMARIO PARA ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "7",
-    "patrimonio": "6363605-0",
-    "nome": "ARMARIO PARA ESCRITORIO",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "8",
-    "patrimonio": "6078915-8",
-    "nome": "ARMARIO PARA ESCRITORIO ALTO",
-    "local": "ADM"
-  },
-  {
-    "seq": "9",
-    "patrimonio": "6078917-4",
-    "nome": "ARMARIO PARA ESCRITORIO ALTO",
-    "local": "ADM"
-  },
-  {
-    "seq": "10",
-    "patrimonio": "7512739-3",
-    "nome": "ARMARIO PARA ESCRITORIO BAIXO",
-    "local": "ADM"
-  },
-  {
-    "seq": "11",
-    "patrimonio": "2546017-0",
-    "nome": "ARQUIVO PARA ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "12",
-    "patrimonio": "6526810-5",
-    "nome": "ARQUIVO PARA ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "13",
-    "patrimonio": "6526851-2",
-    "nome": "ARQUIVO PARA ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "14",
-    "patrimonio": "6528637-5",
-    "nome": "ARQUIVO PARA ESCRITORIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "15",
-    "patrimonio": "6528700-2",
-    "nome": "ARQUIVO PARA ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "16",
-    "patrimonio": "12786326-5",
-    "nome": "BEBEDOURO REFRIGERADO INDUSTRIAL",
-    "local": "RECEPÇÃO"
-  },
-  {
-    "seq": "17",
-    "patrimonio": "3276530-4",
-    "nome": "BINOCULO USO POLICIAL",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "18",
-    "patrimonio": "5943391-4",
-    "nome": "BINOCULO USO POLICIAL",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "19",
-    "patrimonio": "5943392-2",
-    "nome": "BINOCULO USO POLICIAL",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "20",
-    "patrimonio": "2546132-0",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "21",
-    "patrimonio": "2546143-5",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "VEST. FEMININO"
-  },
-  {
-    "seq": "22",
-    "patrimonio": "2546145-1",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "QUARTO LIMPEZA"
-  },
-  {
-    "seq": "23",
-    "patrimonio": "2546147-8",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "24",
-    "patrimonio": "2546148-6",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "25",
-    "patrimonio": "2546149-4",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "26",
-    "patrimonio": "2546150-8",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "VEST. FEMININO"
-  },
-  {
-    "seq": "27",
-    "patrimonio": "2546154-0",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "28",
-    "patrimonio": "2546158-3",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "29",
-    "patrimonio": "2546162-1",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "VEST. FEMININO"
-  },
-  {
-    "seq": "30",
-    "patrimonio": "6287309-1",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "31",
-    "patrimonio": "6291033-7",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "32",
-    "patrimonio": "6296295-7",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "33",
-    "patrimonio": "6302524-8",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "34",
-    "patrimonio": "6636566-0",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "35",
-    "patrimonio": "6637119-8",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "36",
-    "patrimonio": "6637169-4",
-    "nome": "CADEIRA PARA ESCRITORIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "37",
-    "patrimonio": "8736769-6",
-    "nome": "CAMERA DE MONITORAMENTO MINI DOME",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "38",
-    "patrimonio": "8736770-0",
-    "nome": "CAMERA DE MONITORAMENTO MINI DOME",
-    "local": "AREA EXTERNA CIA"
-  },
-  {
-    "seq": "39",
-    "patrimonio": "8736771-8",
-    "nome": "CAMERA DE MONITORAMENTO MINI DOME",
-    "local": "AEREA EXTERNA CIA"
-  },
-  {
-    "seq": "40",
-    "patrimonio": "8736772-6",
-    "nome": "CAMERA DE MONITORAMENTO MINI DOME",
-    "local": "ESTACIONAMENTO "
-  },
-  {
-    "seq": "41",
-    "patrimonio": "8736773-4",
-    "nome": "CAMERA DE MONITORAMENTO MINI DOME",
-    "local": "ESTACIONAMENTO "
-  },
-  {
-    "seq": "42",
-    "patrimonio": "8736774-2",
-    "nome": "CAMERA DE MONITORAMENTO MINI DOME",
-    "local": "LAVANDERIA"
-  },
-  {
-    "seq": "43",
-    "patrimonio": "5251304-1",
-    "nome": "CAMERA FOTOGRAFICA DIGITAL",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "47",
-    "patrimonio": "7721872-8",
-    "nome": "COLETOR/CONTENTOR DE LIXO",
-    "local": "LAVANDERIA"
-  },
-  {
-    "seq": "48",
-    "patrimonio": "6270285-8",
-    "nome": "COMPUTADOR",
-    "local": "SERÁ DESCARREGADO"
-  },
-  {
-    "seq": "49",
-    "patrimonio": "6285249-3",
-    "nome": "COMPUTADOR",
-    "local": "ADM"
-  },
-  {
-    "seq": "50",
-    "patrimonio": "6285251-5",
-    "nome": "COMPUTADOR",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "51",
-    "patrimonio": "6285259-0",
-    "nome": "COMPUTADOR",
-    "local": "ADM"
-  },
-  {
-    "seq": "52",
-    "patrimonio": "6285260-4",
-    "nome": "COMPUTADOR",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "53",
-    "patrimonio": "9803396-4",
-    "nome": "COMPUTADOR BASICO",
-    "local": "ADM"
-  },
-  {
-    "seq": "54",
-    "patrimonio": "9803397-2",
-    "nome": "COMPUTADOR BASICO",
-    "local": "ADM"
-  },
-  {
-    "seq": "55",
-    "patrimonio": "7474772-0",
-    "nome": "COMPUTADOR INTERMEDIARIO",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "56",
-    "patrimonio": "7474774-6",
-    "nome": "COMPUTADOR INTERMEDIARIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "57",
-    "patrimonio": "7474780-0",
-    "nome": "COMPUTADOR INTERMEDIARIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "58",
-    "patrimonio": "5590986-8",
-    "nome": "COMPUTADOR PADRAO",
-    "local": "SERÁ DESCARREGADO"
-  },
-  {
-    "seq": "59",
-    "patrimonio": "5936415-7",
-    "nome": "COMPUTADOR PADRAO",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "60",
-    "patrimonio": "6082268-6",
-    "nome": "COMPUTADOR PADRAO",
-    "local": "SERÁ DESCARREGADO"
-  },
-  {
-    "seq": "61",
-    "patrimonio": "6482143-9",
-    "nome": "ESCANINHO PARA ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "62",
-    "patrimonio": "6486097-3",
-    "nome": "ESCANINHO PARA ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "63",
-    "patrimonio": "6490568-3",
-    "nome": "ESCANINHO PARA ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "64",
-    "patrimonio": "6494977-0",
-    "nome": "ESCANINHO PARA ESCRITORIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "65",
-    "patrimonio": "6498072-3",
-    "nome": "ESCANINHO PARA ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "66",
-    "patrimonio": "6499892-4",
-    "nome": "ESCANINHO PARA ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "71",
-    "patrimonio": "3554276-4",
-    "nome": "ESTABILIZADOR ELETRONICO DE TENSAO",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "72",
-    "patrimonio": "2731196-1",
-    "nome": "ESTACAO DE TRABALHO",
-    "local": "ADM"
-  },
-  {
-    "seq": "73",
-    "patrimonio": "4262221-2",
-    "nome": "ESTACAO DE TRABALHO",
-    "local": "ADM"
-  },
-  {
-    "seq": "74",
-    "patrimonio": "4262228-0",
-    "nome": "ESTACAO DE TRABALHO",
-    "local": "ADM"
-  },
-  {
-    "seq": "75",
-    "patrimonio": "4262231-0",
-    "nome": "ESTACAO DE TRABALHO",
-    "local": "ADM"
-  },
-  {
-    "seq": "76",
-    "patrimonio": "6078935-2",
-    "nome": "ESTACAO DE TRABALHO EM L",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "77",
-    "patrimonio": "6434882-2",
-    "nome": "ESTANTE PARA ALMOXARIFADO",
-    "local": "QUARTO LIMPEZA"
-  },
-  {
-    "seq": "78",
-    "patrimonio": "6435661-2",
-    "nome": "ESTANTE PARA ALMOXARIFADO",
-    "local": "QUARTO LIMPEZA"
-  },
-  {
-    "seq": "79",
-    "patrimonio": "6435803-8",
-    "nome": "ESTANTE PARA ALMOXARIFADO",
-    "local": "QUARTO LIMPEZA"
-  },
-  {
-    "seq": "80",
-    "patrimonio": "2667024-0",
-    "nome": "ESTANTE PARA BIBLIOTECA",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "81",
-    "patrimonio": "2544519-7",
-    "nome": "EXTINTOR DE INCENDIO",
-    "local": "EXTINTOR DE INCENDIO"
-  },
-  {
-    "seq": "82",
-    "patrimonio": "2544520-0",
-    "nome": "EXTINTOR DE INCENDIO",
-    "local": "EXTINTOR DE INCENDIO"
-  },
-  {
-    "seq": "83",
-    "patrimonio": "2547613-0",
-    "nome": "EXTINTOR DE INCENDIO",
-    "local": "EXTINTOR DE INCENDIO"
-  },
-  {
-    "seq": "84",
-    "patrimonio": "2547614-9",
-    "nome": "EXTINTOR DE INCENDIO",
-    "local": "EXTINTOR DE INCENDIO"
-  },
-  {
-    "seq": "85",
-    "patrimonio": "2547617-3",
-    "nome": "EXTINTOR DE INCENDIO",
-    "local": "EXTINTOR DE INCENDIO"
-  },
-  {
-    "seq": "86",
-    "patrimonio": "2547618-1",
-    "nome": "EXTINTOR DE INCENDIO",
-    "local": "EXTINTOR DE INCENDIO"
-  },
-  {
-    "seq": "87",
-    "patrimonio": "2545934-1",
-    "nome": "FOGAO DOMESTICO A GAS",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "88",
-    "patrimonio": "12785494-0",
-    "nome": "FORNO MICROONDAS",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "89",
-    "patrimonio": "2547738-2",
-    "nome": "FRIGOBAR",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "90",
-    "patrimonio": "12785849-0",
-    "nome": "FRITADEIRA SEM OLEO (AIR FRYER)",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "91",
-    "patrimonio": "6378602-8",
-    "nome": "GAVETEIRO USO ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "92",
-    "patrimonio": "6378615-0",
-    "nome": "GAVETEIRO USO ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "93",
-    "patrimonio": "6380635-5",
-    "nome": "GAVETEIRO USO ESCRITORIO",
-    "local": "CELA"
-  },
-  {
-    "seq": "94",
-    "patrimonio": "6381223-1",
-    "nome": "GAVETEIRO USO ESCRITORIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "95",
-    "patrimonio": "6381448-0",
-    "nome": "GAVETEIRO USO ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "96",
-    "patrimonio": "6382554-6",
-    "nome": "GAVETEIRO USO ESCRITORIO",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "97",
-    "patrimonio": "8736618-5",
-    "nome": "GRAVADOR PARA SISTEMA DE SEGURANCA (CFTV)",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "98",
-    "patrimonio": "3050928-9",
-    "nome": "IMPRESSORA MULTIFUNCIONAL JATO DE TINTA",
-    "local": "SALA CMT"
-  },
-  {
-    "seq": "99",
-    "patrimonio": "6239512-2",
-    "nome": "IMPRESSORA TERMICA",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "100",
-    "patrimonio": "6239515-7",
-    "nome": "IMPRESSORA TERMICA",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "101",
-    "patrimonio": "6239518-1",
-    "nome": "IMPRESSORA TERMICA",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "102",
-    "patrimonio": "2547252-6",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "103",
-    "patrimonio": "2547253-4",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "104",
-    "patrimonio": "2547254-2",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "105",
-    "patrimonio": "2547255-0",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "106",
-    "patrimonio": "2547256-9",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "107",
-    "patrimonio": "2547257-7",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "108",
-    "patrimonio": "2547259-3",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "109",
-    "patrimonio": "2547260-7",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "110",
-    "patrimonio": "2547261-5",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "111",
-    "patrimonio": "2547262-3",
-    "nome": "LONGARINA SALA DE ESPERA",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "112",
-    "patrimonio": "7478310-6",
-    "nome": "MESA AUXILIAR ESTACAO DE TRABALHO",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "113",
-    "patrimonio": "7584125-8",
-    "nome": "MESA AUXILIAR ESTACAO DE TRABALHO",
-    "local": "AUDITÓRIO"
-  },
-  {
-    "seq": "114",
-    "patrimonio": "6303963-0",
-    "nome": "MESA PARA ESCRITORIO",
-    "local": "VEST. FEMININO"
-  },
-  {
-    "seq": "115",
-    "patrimonio": "6304122-7",
-    "nome": "MESA PARA ESCRITORIO",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "116",
-    "patrimonio": "6304132-4",
-    "nome": "MESA PARA ESCRITORIO",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "117",
-    "patrimonio": "6621533-1",
-    "nome": "MESA PARA ESCRITORIO FUNCIONARIO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "118",
-    "patrimonio": "6622856-5",
-    "nome": "MESA PARA ESCRITORIO FUNCIONARIO",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "119",
-    "patrimonio": "8740755-8",
-    "nome": "NOTEBOOK BASICO",
-    "local": "INTENDENCIA/ BSC P. AZUL"
-  },
-  {
-    "seq": "120",
-    "patrimonio": "12893010-1",
-    "nome": "NOTEBOOK BASICO ULTRAFINO",
-    "local": "INTENDENCIA/ BSC CABRAL"
-  },
-  {
-    "seq": "121",
-    "patrimonio": "12893012-8",
-    "nome": "NOTEBOOK BASICO ULTRAFINO",
-    "local": "INTENDENCIA/ BSC XANGRILÁ"
-  },
-  {
-    "seq": "122",
-    "patrimonio": "12893013-6",
-    "nome": "NOTEBOOK BASICO ULTRAFINO",
-    "local": "INTENDENCIA/ BSC CABRAL"
-  },
-  {
-    "seq": "123",
-    "patrimonio": "12893022-5",
-    "nome": "NOTEBOOK BASICO ULTRAFINO",
-    "local": "INTENDENCIA/ BSC P. AZUL"
-  },
-  {
-    "seq": "124",
-    "patrimonio": "6239330-8",
-    "nome": "NOTEBOOK WINDOWS 10 PRO",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "125",
-    "patrimonio": "2519577-8",
-    "nome": "NOTEBOOK, NETBOOK E/OU ULTRAFINO NOTEBOOK BASICO",
-    "local": "INTENDENCIA/ BSC XANGRILÁ"
-  },
-  {
-    "seq": "187",
-    "patrimonio": "10068626-5",
-    "nome": "POLTRONA PARA ESCRITORIO",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "188",
-    "patrimonio": "10068638-9",
-    "nome": "POLTRONA PARA ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "189",
-    "patrimonio": "10068645-1",
-    "nome": "POLTRONA PARA ESCRITORIO",
-    "local": "ADM"
-  },
-  {
-    "seq": "190",
-    "patrimonio": "6238140-7",
-    "nome": "PONTO DE ACESSO EXTERNO",
-    "local": "ADM "
-  },
-  {
-    "seq": "191",
-    "patrimonio": "2547347-6",
-    "nome": "PROJETOR MULTIMIDIA",
-    "local": "INTEDENCIA"
-  },
-  {
-    "seq": "192",
-    "patrimonio": "5327271-4",
-    "nome": "PROJETOR MULTIMIDIA",
-    "local": "ADM"
-  },
-  {
-    "seq": "193",
-    "patrimonio": "2545994-5",
-    "nome": "RACK",
-    "local": "INTENDECIA"
-  },
-  {
-    "seq": "240",
-    "patrimonio": "12790287-2",
-    "nome": "REFRIGERADOR DOMESTICO GELADEIRA",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "241",
-    "patrimonio": "2545959-7",
-    "nome": "REFRIGERADOR DOMESTICO GELADEIRA",
-    "local": "ADM "
-  },
-  {
-    "seq": "242",
-    "patrimonio": "2542056-9",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "243",
-    "patrimonio": "2542057-7",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "244",
-    "patrimonio": "2543274-5",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "245",
-    "patrimonio": "2543275-3",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "246",
-    "patrimonio": "2543276-1",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "247",
-    "patrimonio": "2543277-0",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "248",
-    "patrimonio": "2543286-9",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "249",
-    "patrimonio": "2543289-3",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "250",
-    "patrimonio": "2543361-0",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "251",
-    "patrimonio": "2543366-0",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "252",
-    "patrimonio": "2544778-5",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "253",
-    "patrimonio": "2546014-5",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "254",
-    "patrimonio": "2546015-3",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "255",
-    "patrimonio": "6073523-6",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "256",
-    "patrimonio": "6073524-4",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "257",
-    "patrimonio": "6073525-2",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "258",
-    "patrimonio": "6073526-0",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "VEST. MASCULINO"
-  },
-  {
-    "seq": "259",
-    "patrimonio": "6376927-1",
-    "nome": "ROUPEIRO PARA VESTIARIO",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "260",
-    "patrimonio": "3496965-9",
-    "nome": "SANDUICHEIRA",
-    "local": "COZINHA"
-  },
-  {
-    "seq": "261",
-    "patrimonio": "5329003-8",
-    "nome": "SWITCH",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "262",
-    "patrimonio": "2545722-5",
-    "nome": "SWITCH (SC)",
-    "local": "18ºBPM"
-  },
-  {
-    "seq": "263",
-    "patrimonio": "6559632-3",
-    "nome": "SWITCH (SC)",
-    "local": "RECEPÇAO"
-  },
-  {
-    "seq": "264",
-    "patrimonio": "6226677-2",
-    "nome": "SWITCH NAO GERENCIAVEL DE MESA",
-    "local": "INTENDENCIA"
-  },
-  {
-    "seq": "265",
-    "patrimonio": "12786215-3",
-    "nome": "TELEVISAO SMART TV",
-    "local": "AUDITORIO"
-  },
-  {
-    "seq": "266",
-    "patrimonio": "2547281-0",
-    "nome": "TELEVISÃO",
-    "local": "VEST. OFICAIS"
-  },
-  {
-    "seq": "267",
-    "patrimonio": "6591826-6",
-    "nome": "VENTILADOR NAO INDUSTRIAL",
-    "local": "VEST FEMININO"
-  }
-];
-
+function renderDoc(itens, nomeResp, matricula, dataConf) {
   // Agrupa por local
   var grupos = {};
-  ITENS.forEach(function(item) {
-    var local = item.local.trim();
+  itens.forEach(function(item) {
+    var local = (item.local || '').trim();
     if (!grupos[local]) grupos[local] = [];
     grupos[local].push(item);
   });
 
   // Contagens
-  var total = ITENS.length;
+  var total = itens.length;
   var conferidos = 0, pendentes = 0, emUso = 0, sucata = 0, descarregar = 0, manutencao = 0;
-  ITENS.forEach(function(item) {
-    var st = statusMap[item.patrimonio] || {};
-    if (st.status === 'CONFERIDO') {
+  itens.forEach(function(item) {
+    if (item.status === 'CONFERIDO') {
       conferidos++;
-      var sitRes = (!st.situacao || st.situacao === '' || st.situacao === 'undefined') ? 'EM USO' : st.situacao;
-      if (sitRes === 'EM USO')        emUso++;
-      if (sitRes === 'SUCATA')        sucata++;
-      if (sitRes === 'A DESCARREGAR') descarregar++;
-      if (sitRes === 'EM MANUTENCAO') manutencao++;
+      var sit = (!item.situacao || item.situacao === '' || item.situacao === 'undefined') ? 'EM USO' : item.situacao;
+      if (sit === 'EM USO') emUso++;
+      if (sit === 'SUCATA') sucata++;
+      if (sit === 'A DESCARREGAR') descarregar++;
+      if (sit === 'EM MANUTENCAO') manutencao++;
     } else {
       pendentes++;
     }
   });
   var pct = total > 0 ? Math.round((conferidos / total) * 100) : 0;
-
   var dataFormatada = formatarData(dataConf);
   var locaisOrdenados = Object.keys(grupos).sort();
 
   var html = '';
-
-  // Cabeçalho
   html += '<div class="cabecalho-pm">';
-  html += '<img src="data:image/png;base64,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vS5fvmKz2bp16yYIQvv27YcMGdKrVy9CyIULF1at+hqAYMNuHBG46nLW2uocANAiqoUmibvV2UgST4s99v2YCgDjh3bf+c0UyVXBEBlniApTGSI++eSTTZs2LS4u/uCDD44cOfLJJ59s375d864A4N804NdLFxlXkKOtpq5zYsc7xUoJaNInAACUEADSxEf8+9t9N61exBmev3jWz/9mprp9+/bbtm2bPXv2kSNHpkyZUlxcHBAQ0LdvX41VjlrMwj3O2l1r3n95aHcA+OGH/YgoqY0k8RoxaS32iIyKFkVDWXm1y+Wor6ulAAgcgGtHTSEhIdXV1RMmTEhISDh//jxjbMaMGZcuXQKAxx5/7Ny5c23atkNkqqz6NvFeOPfTlglRTzzRbeTw5955c9zwoc/pBBE0e0MAAI4gCHpbHT+YerW0LC3/RlaHdh3PnTvfo0cPALh48eJHH32EiOfOnYuPj584cWJlZWVgYIBmj3gz5idOu83ldJWXV4uCITIqCgDJXZthaMRpIRCgADyieVhoULOcogrJU++01fkFA4IH0KRtWrQAaOfOnStXrty8eXNERERycnJycnLv3r27desGADJneqpHAZmikOqKjV/PD2we7rTbRb2gKvDrpQtp12/oiV4mKtXCaKSiznDhalFiWukws17lSmRE5OHDh48ePXrgwAFKaVxcXHV19cCBA8eMGQMA0dExAMARRWAqUABw1JZ43K68worgkGbh4eEATLjLRUOjTosQwrhiMuiioyNvFNXYnY6qygIAIKADEAgBxtjw4cO9vLxUVd2wYYPT6Tx48GBgYOCMGTNCQkKOHDniljx6EBTGiUhrj57d8PnC68Ul09+fNXfOoh9/+EmV5diomJuDE4qEEMIZun2Zp1/XpBFvvhsSEiEAcXtcR44cCQ0NnTVrVlBQUGpqqtPp3LBhA2PMy8tr+PDhjLGbrgsBAKorCx317ryimqjoSKPByDlrdArfBZhogkMA6NL1UaeH19Q5q6tvAHJKDACg7XWjo6O//vrr2NjYoqIiq9U6ffr0ioqKxMTEmJiYWbNm6UQdKhwBgLlPzVlod9hCgptVlle3eqhVp8REzln/vn1EUeTICCASCgB/axbxaUjctLjE7knducIYI3qdYdbMmTExMR06dCgvL581a5bFYikuLo6NjV21alVMTIwgCJSKcNMF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" alt="Brasão PMMG">';
+  html += '<img src="data:image/png;base64,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vS5fvmKz2bp16yYIQvv27YcMGdKrVy9CyIULF1at+hqAYMNuHBG46nLW2uocANAiqoUmibvV2UgST4s99v2YCgDjh3bf+c0UyVXBEBlniApTGSI++eSTTZs2LS4u/uCDD44cOfLJJ99s375d864A4N804NdLFxlXkKOtpq5zYsc7xUoJaNInAACUEADSxEf8+9t9N61exBmev3jWz/9mprp9+/bbtm2bPXv2kSNHpkyZUlxcHBAQ0LdvX41VjlrMwj3O2l1r3n95aHcA+OGH/YgoqY0k8RoxaS32iIyKFkVDWXm1y+Wor6ulAAgcgGtHTSEhIdXV1RMmTEhISDh//jxjbMaMGZcuXQKAxx5/7Ny5c23atkNkqqz6NvFeOPfTlglRTzzRbeTw5959c9zwoc/pBBE0e0MAAI4gCHpbHT+YerW0LC3/RlaHdh3PnTvfo0cPALh48eJHH32EiOfOnYuPj584cWJlZWVgYIBmj3gz5idOu83ldJWXV4uCITIqCgDJXZthaMRpIRCgADyieVhoULOcogrJU++01fkFA4IH0KRtWrQAaOfOnStXrty8eXNERERycnJycnLv3r27desGADJneqpHAZmikOqKjV/PD2we7rTbRb2gKvDrpQtp12/oiV4mKtXCaKSiznDhalFiWukws17lSmRE5OHDh48ePXrgwAFKaVxcXHV19cCBA8eMGQMA0dExAMARRWAqUABw1JZ43K68worgkGbh4eEATLjLRUOjTosQwrhiMuiioyNvFNXYnY6qygIAIKADEAgBxtjw4cO9vLxUVd2wYYPT6Tx48GBgYOCMGTNCQkKOHDniljx6EBTGiUhrj57d8PnC68Ul09+fNXfOoh9/+EmV5diomJuDE4qEEMIZun2Zp1/XpBFvvhsSEiEAcXtcR44cCQ0NnTVrVlBQUGpqqtPp3LBhA2PMy8tr+PDhjLGbrgsBAKorCx317ryimqjoSKPByDlrdArfBZhogkMA6NL1UaeH19Q5q6tvAHJKDACg7XWjo6O//vrr2NjYoqIiq9U6ffr0ioqKxMTEmJiYWbNm6UQdKhwBgLlPzVlod9hCgptVlle3eqhVp8REzln/vn1EUeTICCASCgB/axbxaUjctLjE7knducIYI3qdYdbMmTExMR06dCgvL581a5bFYikuLo6NjV21alVMTIwgCJSKcNMFqLaqkuo6j0PiXbs9CgDIG3HRjZk0aGkSAQC0N4tKah21pZKjSu8ViACV5WWFRcWJiYnPPPOMw+GQZTkqKio1NXXWrFmI6OPjs2TJEkEQZFUxCLqCrTsKM399e940vyD/2Z9Ok1VJb+AIrvYdWocGBRUUF4t6PZNRpOxxau5gNOTv2JfXZ1uLF5/zSJJRp1+6bGmnTp0vXrx48dLFmJiY6OhoRHz//fcHDRoEAOfPX2jePCwwMIAScDtqHLbSouJqAOjSLQkAAIRG8wCNZjwESkQAaN+htcFkSr9W6rLXV5XfAAAg3F7n6N7tsfHjxx85cuTgwYOqqubm5o4cOVJbk1MPprZs2VJRZVEvsuqaq58vD4oL9VjMJ08cl2S3XicqsqoTjLU2h63aZvWxUOQUqJUTM4cKnazzgbRly1VbjUGvU2UlIaHlocOHIiMjAWHkyJE5OTmMsUOHDh05cmTcuHFdu3aptdVqECoqSp2OysysPKPJ1L5dGwCghDa6JW4MMAIhhHMWHBzWvn379Mxih91eUXSDEJCYJyo6ulOnTitWrHjnnXeWL19uMBgoFd57//3FSxdfu5Zu1Bm2bt0qUioQkrlqk3o9R/Z4nLLiGxDIPIxwkRITl4V58xZHhIfMnj2dAGGgtLV6+ZvMRhe3GEWWnpGxYq1AqE4Qt2zbajIY09OuLl665P33P6CEGo3G5cuXT5o0aeXKlZ06J0XHRDNVAoDKohv2esfV6/nt2nUIDQ5D3kiK996AiRZRIwDt37dvrUspq6yqLS3kXNFxPRXohLffBID09PSpU6d5eVnLKyrcHumN117/x/v/aNO2zdFffqFUrLmWnv/NWrOPqR6ES2lX7bLb32pGLlNKVbdnxLhh36yaG24JlBH9RTK6aZieuzkhTBUMvqbC1Ztq064Rgf7y87E2bdpMe/8fb7z2utsjV1ZWWq3WadOmXbt2DQDeenuSVnPBuWQvTS8pd9e4cED/vgQI4wwoNDqH75nE0yTUv39/AJqWUVZRl1ldWSiIoqrKgwc/N2HCBADYuPHbwsKi5mFhT/Xs1e+pPgvnL6JElzL2ZQDMmPsVVFWBUW9X1JioWF+93i7XK8AUJpmtxpbx0b5NfCRwo6oO8Q5qZjaqqIhcoIyYqCBUVV1ctAIAXhvzCoi6uQuX9OvT+/E+PULCQgsLCzds2AAAb7311nPJA1VVFURDTVVBeU1B+vUSAOjbt28D8w+sYe0HShGxTZuHo6Nbn750o9pRVnwjXaui4AwXLFiwffv2yZMnWyyWFhERBrPph58OAsDYN9/o0LZN+aHUygM/mfysklNq+1DrxLi41hFx3v5BZh8/b6+mWTfyr19MQxCqwN3Ox/sZ/3AmyQIIjAISyhlvYjXW7Pux5OejD7Vr9eYrbwDAD6kHLWZLi8hIq9U6efLkbdu2LVywkHMPIRwAinPTbPW1Zy9lx0bHt2nzMN7KB/4+wFrOUafTvzAkubCyvqRcKc29xJmLCjpBoACQnJxst9tlWb6Rn7dpy2YAGDv65S8++0R11F3/YpnIZY8OzaK+NvdGxr4fTu5N3bhpx9q1369a/s2FXy/HP9TKpDdQZ91jPdvprAJRiEIERUBGBJlSSQ9einxp7iLVaf/ii09TxowBgC0bNubm5Hg8HrvdPnjwYCCgE81IBC4rZTmXi0sdhRX1z7/wvF5vaEgqNo4L713joSiKTqe7cPZ0x6Qu/bu3e+nZNo8Pmdg04OFXx7+iM+i6dulaW1vbt1/fdavXPtKtS0BQYFLHTgCQuW5N+nszrb5esqp6Mepkap2O76iqDBz2dIfOnZuaTCHRwXZbZX7G9aL89EB/L/OFgqBzVaAXCAeB6RRBUQTFi5uq7fY2/zMzevQIADhz5nRlaeXxU8dHjxm9b99+X1/fEydPqm734hWrbBVZR7d+uX7P2b2Hr5w7fTqxUyfGmHDvdPz9EvFaaq59xw4dkzqfOHvdVlebffWUXi+EhjVb8dWKlJSUDRs21NTUBgUH+Tf137ll+7X0dHTUXF+82qI3mDxoUYmboheIIArdnktK6hDhpa+32zMO/7T5wJ4t5RUZISF+Rotg7tzc3dwgeZwCAEUwqKJR1UmgeBvFjCUr0W67lpa1bdsu36AmQSEhNbbajRs3jho1asVXX4WFR5oMupwrR6ocdcfPXO/cqVP7Du05v589w/3z0oQQpjJB1I0d8/KrL7+cnlXZNOB6XU3Jxx/Pcjod8+fPP3v2bPdu3WfMnrV9285mIcFe/t5pS1bznDzq7+1WUUSgHPO9aXqQKT0/X866YdDpPZIUGxf0UKtIi0FkMpMIlahYF+yVoPdx5JYYCTNQEQAAkZiM7sK8jEWrfEanBIWF7dmxw9c3oGuXroypAPD222/P+miGo6a0quBKWk55bb007pWXqSAyxii932nLv6lsogIFVJ9/9vmA4NDUY9cdDnvO1cMAMG/evG83bX564DOPPNKpZWy8KIop41JC6z15Szea/aycq0AQkDgI5HUI0HWNbhEe3jTIHB4daK+X4h6KJQbZ4VABnV5my+7DmesvFzgHdIJBHZwhOgev5SgLqGMMAixeuas2+Cv2US+nWLg5IS7mkc6dBz3z7KZNm7XkWcaVQzV2++Gf0wKCggYPeR7uceD4OwATQpgq+/l5jxqTkpFXlZNXXph1zuMsZ5wPHzZ0966dx44d27Njd5fHuogG4dSsuWanAwQAQIGDQy/eSPDLcdvqbTUtIgIf79wpNNA6dGiSr7nJt1+fyi+t9PL1PXP82o8/nrucWfDBknVnLIL7pe78qTZqE6ObKyrjOkJFl/3k7M8MAiT26L579+7jJ47v2PmvYcOGMsY9joqCnAvZhdUZ+TWjx6Y08fVV1fu5qwcCDACE6gHx9fHjLRbvPQfOV1Xbrl48LFBqr3Pm5uVkZmXERMU80rmj/dSZqh8OkqZ6ZNq6oMsl6l5nZVRwRCv/EJdUfenSOVl2RbTwP5B6DLjp4YfjM/Lq135/jDOio/obuZWff7Zp7ffHfm3ilZYUeiPGUBGiKzRy0cdi23vQffxkYlKHyBaRmZlZuTfy7PZaQaDXfv25pqpqz4+/WiyW18e/hohaouePAgZBlJmzRXjEyy+/ciW7LCOvIjvtlLuuymF3PPlkn/i4loqAAU39L0ybZ6KcESZwAVGgou6XkuLc4jqD0XSjpkI0Wb2DAqod4o69GccvZgz+W2cjsC07Tta4FBSoyhWBioiGn36+/OOBi+awZuKTD8kDW1c295EY+iA99cn8QD8/Rml8fNxTfZ+y221Oe1nm1ZO5N8qvZpWNHjs6IrwFU5UHKS9+AA0DCNSAiP/4xzte3j7b9l1w1NZcObovrHnw4uUrE9t1TEl5IWvtWjktk3iZZSSEE2/QnZPrf3TUPt4q1mDhVh9rbZmtqFBauebQ6m8PFpS6fzqSse9Y5pVrBZQKjDOkiMj5zYJJVmsrqyisySwoYzH+qq+eW4zKles31mx4KWVM246JS5cubdYs8tyJvbW19m0/XPLx8vrgvfcRkQgPVE39gIB1nPPQ0NB3J719I7/80pXinNxTZQW/9u31xKkzp5qDMX3B4kAz1TPJyFWRKB6BbqkoJlZjZHBAfkVpTXmtosKlKzn1HknUibIk791/evWGH7UkOdysnuaAnHNusep9m+h1BvTWC06TojeiSfIEGXQZ8xZFcOX0qdN9nniirCi9OPvs5bTrWXnl70x6OzQ07NZq9KeYtNaOUs75u5MnhzcP37rvTKW98sovexS5XtAJRxat5tllboE6FVRkKoHueL3tlNPRIirI0sTQPDrK7OdfUFl/LbsQAFRFRQBCADlw1CoMOGhZR64AgM5ocripB6lR78VlsVriNRzsOl1Ncfmh5csMgqDKzjPHt1fbarbuOxPePPydyX/nnFNK7n8s3EAPeudBOyuzWq1z5nzxwtCh+w6k+z1tTLuQ2i4pueVzTxmGPCXpQeBAGQEqhCvwhKxag72p224URaOXj91hm/Q+I9TgdjsJAUEQAQE5cuRGo4EQVBSJUsI5+vt5WYx6xhmjhCDqR7kFBQkhSKjKBQC8dn5/fX7WjkMZFTXy98vnWr28VJU1lEz/e7o7kXkvajjIGjJkKAD8482+3y56o7ow7QFfLykprSivuvt5ZUVFSVHxA3ZSXnr1+wWv//PVvgDw/OARiCgrMkN25wnSvel3A+ac5xcUBwQEBgZ6LZn54t7VUzyeekVlsqJwmbmZ6lEVJsseJnNZUWRVZkyRPIyx4X8baTSaJ02ccOnizUO58xfOTZo00WgwjvjbS6qqSpIsqwpjjDOmcpmpisRUpqqqqtYzmXkUyV29dd0/l384IjDQKygwqLigiHFVUSWO6n8FsEbaEel3338PAN0SE775fPTPu+YhMlXxIOMcJY7yb8SkledynpWVNXfunNatW3l7ez/11FOvvfpqixYRLVu2nDNnTlpaWsMR7G/eZBwZ83DuZhyRHd6xcOW8kV07RwPA5u+34G21Ag9OvxswIkqSGxHfeON1ABg5uPvX88ZcPrUNEZnq4SjhHWxzrpWnTJo0KS8vb8GCBYmJiXFxcRaLJS4ubsGCBYWFhZ9++qnb7Wa/LX7l6EFUOEePqiLi1ZP7v5n7xshnuwPA66++joiK8hvJ/hcBq6qiqsztdj+S1BEA/v7GwA3zx+SmnUJEprI7AGslH0ePHk1OTh42bFiHDh2mTJlis9nKy8v//ve/JyYm9uzZc+TIkUePHsXf1IJyjpKKTGYcEXPTD66b9+rfXx9AALp06uZ2OxVVZr/DkP8Y4AbOcm9kB4cEe1uMn7w3ZM3Sl0ty0xFRVTz8FmjN5DZt2pSUlPTmm28uXbr05MmTt/dz8uTJKVOm9O7d+9FHH920aRP+pqIFZZUhYmn+2XULx89+71lvixgSHJabU4jIGbvTlB6Q/pO7XghAKWVMjWwR/d3mzW6ZL/nmQGVF3S8/rKguui6IBs5v1r9SSotLir/77ruQkJCuXbvGx8cnJSVptT8aJSUlPfnkk+PHjw8ODt68eXNRUZGWWgIA5Ewn0KqSzGN71tmq7Eu+OeSWxe++2xwZ1YwxmZJ732q4L/3nl9sEQVAU+bHHHt/w7friirqVXx+pqi4+uG9pdVGOQKnCFUSVEHLi6JlWrRLefXdScHBwZGQk57yhWk+rvgsPD/f3b/ru5MmtH257/PgJQog276kgVJZkHNi9uKKi6qs1B0oqHBvWb+j+WDdF9QiC/kFX3bvpPzPpBlIUFRGXr1gOAK2iQxZ+POy7JW+X519HREV1IarLly/74vM5D9LV3C++WLFsNXJUZBcilhVkbFw+acHHL7SKCgGApStWIqIkSfe5wPEg9EcB4y1vuXjxCgCIiwz+cubzG5e8VpBxDhHdHntMQvMXh/+NMa4o8t0lJqgt76rCGRv14tC42FiXS0LEGznH1y1PmTvzxYSoUABYunQx3kR71+r1O+lPAIwcFVlGxAVfLQOA6DDfuVMHblgw9sq5g4i4cNHSnbu3InJ273BI+23n7j0LlyxExGvnjqxfOG7O1EHRYU0AYNGyxYioyAq/RX+E2T8HMGdcUm2IuG79ZgBdkI9x+qRBXy9MOXiovdbk39qhzG4uqqcPbVgzP2XWhOeCvC0A4rp1mxBRUpy/P8RonP4MwHizqEf2yIi4Z+8eL98mOgoTUnqs/fLFXZs/stlKEJEzho2vJFwTh91WvHfjrLVzUt5K6aMjYG3ivWvPbkSUPB6V8burJv8z+pMAa3/spm2fv3QhNj4WAJKfSlz6PyO3rJyYe/08IipcVbgTUUbGOVeQIZOZVqqXl3l664q3l342YtBTHQEgPqHlhV/PI6Isy5xrpXB/yJIb6E+4IX4HaXnwyqrKl19+fdfOre3im40Y3NU/xDvmoUc6dR2mM1oYY0BVgnqGik7QKx7P+V+2ZF87Vl7pWLvt+JWMgkHJyatWrvT391cVVdT92Zf2/xSx3UENdYEfzZoNABaRTkzpufqL4bvXTS3OuoiI/Fa1cOGNC9vXzVz76ci3R/Qx6wUAmDFjxu2d/EEXdTf9+RoGAADOOQdCKaGpqQdfe+P17MzMxzslDOrXOijQEBHzWOfuwxgq53/eU5x1vKymesv+K8fOZsXGxi9buvSJ3r0454BAHyxH9XvpvwVYux+iKKpeZ6iqrpo6bdqK5V/5mPTDn+/SrlWz4IBITgyV5dcvX83bsPV4rYePe/21T2Z93LSp3+310v8V+nMNRiN+08MwzlVZlrSHe/ftio2LB4BWsSGzJvf/+J1+LWNDACAqNmH/3v2IiKjKsgtR/bP8U6P0XwF8BzXkhurq6qZMmSKINy9MUkE3ZerUOrsdEVVF5Zz9r6z+a/RXAEZErchZ+56ent63X79+/funpV3VnmiZo7+Gk//SHG584gCAdluy4bmsKLpbM/av+e80fxHg20nbIcKtDfNfPPr/AeD/W/qrBfx/Tv8P4bE583BeAwgAAAAASUVORK5CYII=" alt="Brasao PMMG">';
   html += '<div class="texto-cab">';
-  html += '<div class="linha1">POLÍCIA MILITAR DE MINAS GERAIS</div>';
-  html += '<div class="linha2">SEGUNDA REGIÃO DE POLÍCIA MILITAR</div>';
-  html += '<div class="linha3">TRIGÉSIMA NONA COMPANHIA DE POLÍCIA MILITAR</div>';
+  html += '<div class="linha1">POLICIA MILITAR DE MINAS GERAIS</div>';
+  html += '<div class="linha2">SEGUNDA REGIAO DE POLICIA MILITAR</div>';
+  html += '<div class="linha3">TRIGESIMA NONA COMPANHIA DE POLICIA MILITAR</div>';
   html += '</div></div>';
-
-  // Título
-  html += '<div class="titulo-doc">RELATÓRIO DE CONFERÊNCIA DE MAPA DE CARGA</div>';
+  html += '<div class="titulo-doc">RELATORIO DE CONFERENCIA DE MAPA DE CARGA</div>';
   html += '<div class="data-doc">Contagem, ' + dataFormatada + '.</div>';
-  html += '<div class="assunto-doc"><strong>Assunto:</strong> Conferência geral do Mapa de Carga da 39ª Cia PM / 18º BPM.</div>';
-
-  // Corpo
-  html += '<div class="corpo-doc">';
-  html += 'Em cumprimento às normas de controle patrimonial, foi realizada a conferência do Mapa de Carga da 39ª Companhia de Polícia Militar / 18º Batalhão de Polícia Militar, abrangendo todos os itens de material permanente sob responsabilidade desta unidade, conforme detalhamento a seguir.';
-  html += '</div>';
-
-  // Resumo
+  html += '<div class="assunto-doc"><strong>Assunto:</strong> Conferencia geral do Mapa de Carga da 39a Cia PM / 18o BPM.</div>';
+  html += '<div class="corpo-doc">Em cumprimento as normas de controle patrimonial, foi realizada a conferencia do Mapa de Carga da 39a Companhia de Policia Militar / 18o Batalhao de Policia Militar, abrangendo todos os itens de material permanente sob responsabilidade desta unidade, conforme detalhamento a seguir.</div>';
   html += '<div class="resumo-box"><table>';
   html += '<tr><td>Total de itens:</td><td>' + total + '</td></tr>';
   html += '<tr><td>Itens conferidos:</td><td>' + conferidos + ' (' + pct + '%)</td></tr>';
@@ -1155,44 +194,37 @@ function renderDoc(statusMap, nomeResp, matricula, dataConf, url) {
   html += '<tr><td>Em uso:</td><td><span class="sit-badge sit-em-uso">EM USO</span> ' + emUso + '</td></tr>';
   html += '<tr><td>Sucata:</td><td><span class="sit-badge sit-sucata">SUCATA</span> ' + sucata + '</td></tr>';
   html += '<tr><td>A descarregar:</td><td><span class="sit-badge sit-descarregar">A DESCARREGAR</span> ' + descarregar + '</td></tr>';
-  html += '<tr><td>Em manutenção:</td><td><span class="sit-badge sit-manutencao">EM MANUTENCAO</span> ' + manutencao + '</td></tr>';
+  html += '<tr><td>Em manutencao:</td><td><span class="sit-badge sit-manutencao">EM MANUTENCAO</span> ' + manutencao + '</td></tr>';
   html += '</table></div>';
 
-  // Tabela por local
   locaisOrdenados.forEach(function(local) {
     var itensLocal = grupos[local];
     html += '<div class="secao-local">📍 ' + local + '</div>';
     html += '<table class="tabela-itens">';
-    html += '<thead><tr><th>Nº</th><th>Patrimônio</th><th>Item</th><th>Situação</th><th>Conferido por</th><th>Data/Hora</th><th>Observação</th></tr></thead><tbody>';
+    html += '<thead><tr><th>No</th><th>Patrimonio</th><th>Item</th><th>Situacao</th><th>Conferido por</th><th>Data/Hora</th><th>Observacao</th></tr></thead><tbody>';
     itensLocal.forEach(function(item) {
-      var st = statusMap[item.patrimonio] || {};
-      var sit = (st.status === 'CONFERIDO' && (!st.situacao || st.situacao === '' || st.situacao === 'undefined')) ? 'EM USO' : (st.situacao || '');
-      var cls = st.status === 'CONFERIDO' ? corLinha(sit) : '';
+      var sit = (item.status === 'CONFERIDO' && (!item.situacao || item.situacao === '' || item.situacao === 'undefined')) ? 'EM USO' : (item.situacao || '');
+      var cls = item.status === 'CONFERIDO' ? corLinha(sit) : '';
       html += '<tr class="' + cls + '">';
-      html += '<td>' + item.seq + '</td>';
+      html += '<td>' + (item.seq || '') + '</td>';
       html += '<td style="font-family:monospace;font-size:9pt">' + item.patrimonio + '</td>';
       html += '<td>' + item.nome + '</td>';
-      html += '<td>' + (st.status === 'CONFERIDO' ? badgeSit(sit) : badgeSit('')) + '</td>';
-      html += '<td>' + (st.confPor || '—') + '</td>';
-      html += '<td style="font-size:9pt">' + (st.confData || '—') + '</td>';
-      html += '<td style="font-size:9pt">' + (st.obs || '—') + '</td>';
+      html += '<td>' + (item.status === 'CONFERIDO' ? badgeSit(sit) : badgeSit('')) + '</td>';
+      html += '<td>' + (item.confPor || '-') + '</td>';
+      html += '<td style="font-size:9pt">' + (item.confData || '-') + '</td>';
+      html += '<td style="font-size:9pt">' + (item.obs || '-') + '</td>';
       html += '</tr>';
     });
     html += '</tbody></table>';
   });
 
-  // Assinatura
   html += '<div class="assinatura">';
   html += '<div class="linha-assin"></div>';
   html += '<p><strong>' + nomeResp + '</strong></p>';
-  html += '<p>Matrícula: ' + matricula + '</p>';
-  html += '<p>39ª Cia PM / 18º BPM</p>';
+  html += '<p>Matricula: ' + matricula + '</p>';
+  html += '<p>39a Cia PM / 18o BPM</p>';
   html += '</div>';
-
-  // Rodapé
-  html += '<div class="rodape-doc">';
-  html += 'Avenida Carandaí, nº 1, bairro Ceasa - Contagem / MG &nbsp;|&nbsp; Telefone: 3399-3440 &nbsp;|&nbsp; 18bpm-39ciapm@pmmg.mg.gov.br';
-  html += '</div>';
+  html += '<div class="rodape-doc">Avenida Carandai, no 1, bairro Ceasa - Contagem / MG &nbsp;|&nbsp; Telefone: 3399-3440 &nbsp;|&nbsp; 18bpm-39ciapm@pmmg.mg.gov.br</div>';
 
   document.getElementById('doc').innerHTML = html;
 }
